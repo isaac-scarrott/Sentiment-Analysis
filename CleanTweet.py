@@ -38,7 +38,7 @@ class CleanTweet:
     def removePunctuation(self):
         for index, word in enumerate(self.tempTweetListFilterd):
             self.tempTweetListFilterd[index] = re.sub(r'[^\w\s]','',word)
-            self.tempTweetListFilterd[index] = re.sub('^[0-9]+', '', word)
+            self.tempTweetListFilterd[index] = re.sub('^[0-9]+', '', self.tempTweetListFilterd[index])
             if self.tempTweetListFilterd[index] == '':
                 del self.tempTweetListFilterd[index]
                 del self.weight[index]
@@ -64,7 +64,7 @@ class CleanTweet:
     def correctSpelling(self):
         self.tempTweetText = str(TextBlob(self.tempTweetText).correct())
             
-temp = CleanTweet("RT : @Isaac  #Banana isn\'t is a very good string to test https://www.google.co.uk/")
+temp = CleanTweet("RT : @Isaac  #Banana isn't is a very good string to test https://www.google.co.uk/")
 
 temp.tempTweetText = temp.removeUser()
 temp.tempTweetText = temp.removeRT()
